@@ -1,0 +1,17 @@
+package heap;
+
+/* Heap je uredjeno binarno stablo
+ * Max-heap ima ogranicenje da je vrednost parent noda veca od vrednosti dete noda 
+ * Build-max-heap - kreiramo max-heap iz nesortiranog niza 
+ * Heapify - slicno build-max-heap, ali podrazumeva da je deo niza sortiran (zbog toga je i brzi) 
+ * 
+ * U sustini konstantno cemo praviti max-heap kako bi pronasli najveci element, 
+ * da bi ga zatim pomerili iz heap-a i ubacili ga u sortiran niz  */
+public class Main {
+
+	public static void main(String[] args) {
+		
+
+	}
+
+}

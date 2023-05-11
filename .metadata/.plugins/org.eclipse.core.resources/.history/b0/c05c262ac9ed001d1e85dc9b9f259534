@@ -1,0 +1,20 @@
+package merge;
+
+/* Merge sort se obicno obavlja rekurzivno. Zovu ga jos i divide and conquer algorithm, zato sto
+ * deli problem na manje podprobleme, zatim resava te manje probleme pa ih kombinuje nazad u zeljeni
+ * rezultat. 
+ * U slucaju sortiranja elemenata niza to znaci da ce niz biti podeljen na dva dela, pa ce elementi iz originalnog
+ * niza da budu kopirani u dva nova podniza. Zatim ce biti pozvan nazad mergeSort() i u njega ce */
+
+public class Main {
+
+	public static void main(String[] args) {
+		int[] niz = {5, 16, 8, 10, 3, 14, 28, 7, 1, 9, 15}; 
+		
+		// stampamo niz
+		for(int i : niz)
+			System.out.print(i + " ");
+
+	}
+
+}

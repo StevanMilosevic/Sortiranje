@@ -1,0 +1,90 @@
+package merge;
+
+/* Merge sort se obicno obavlja rekurzivno. Zovu ga jos i divide and conquer algorithm, zato sto
+ * deli problem na manje podprobleme, zatim resava te manje probleme pa ih kombinuje nazad u zeljeni
+ * rezultat. 
+ * U slucaju sortiranja elemenata niza to znaci da ce niz biti podeljen na dva dela, pa ce elementi iz originalnog
+ * niza da budu kopirani u dva nova podniza. Zatim ce oni biti dalje podeljeni na pola i tako dok se ne dodje do 
+ * samih elemenata, koji se zatim rearanziraju nazad u onaj pocetni niz ali u svakom koraku nazad ce 
+ * njihov redosled da bude uskladjen na nacin kako to zelilmo.  */
+
+public class Main {
+
+	public static void main(String[] args) {
+		int[] niz = { 5, 16, 8, 10, 3, 14, 18, 7, 1, 9, 15 };
+
+		// stampamo prvobitno stanje niza
+		for (int i : niz)
+			System.out.print(i + " ");
+
+		mergeSort(niz);
+		
+		// stampamo sortiran niz
+		for(int i : niz)
+			System.out.print(i + " ");
+		
+	}
+
+	// algoritam
+	private static void mergeSort(int[] niz) {
+		int duzina = niz.length;
+		if(duzina <= 1)
+			return;
+		
+		int sredina = duzina / 2;
+		int[] leviNiz = new int[sredina];
+		int[] desniNiz = new int[duzina - sredina];
+		
+		int i = 0;	// levi niz
+		int j = 0;	// desni niz
+		
+		for(; i < duzina; i++) {
+			if(i < sredina) {
+				leviNiz[i] = niz[i];
+			}
+			else {
+				desniNiz[j] = niz[i];
+				j++;
+			}
+		}
+		mergeSort(leviNiz);
+		mergeSort(desniNiz);
+		merge(leviNiz, desniNiz, niz);
+	}
+	
+	private static void merge(int[] leviNiz, int[] desniNiz, int[] niz) {
+		
+		int leftSize = leviNiz.length / 2;
+		int rightSize = desniNiz.length - leftSize;
+		int i = 0, l = 0, r = 0; // indeksi za nizove
+		
+		/* proveravamo uslove za merge (spajanje) nizova uz pomoc WHILE */
+		while(l < leftSize && r < rightSize) {
+			// sve dok ima elemenata u levomNizu i desnomNizu mi cemo da dodajemo elemente u originalni niz
+			if(leviNiz[l] < desniNiz[r]) {	// uz proveru koji element je manji
+				niz[i] = leviNiz[l];
+				i++;
+				l++;
+			}
+			else {
+				niz[i] = desniNiz[r];
+				i++;
+				r++;
+			}
+		}
+		/* ostaje sansa da ce ostati jedan element koji ne moze biti uporedjen sa nekim drugim, 
+		(posto je ostao samo jedan), zato uvodimo WHILE petlje, jednu za leviNiz, drugu za desniNiz */
+		while(l < leftSize) {
+			niz[i] = leviNiz[l];
+			i++;
+			l++;
+		}
+		while(r < rightSize) {
+			niz[i] = desniNiz[r];
+			i++;
+			r++;
+		}
+		
+	}
+
+}

@@ -1,0 +1,20 @@
+package selection;
+
+/* Selection sort ne spada u najbrze nacine sortiranja, pre svega zato sto koristi ugnjezdene petlje
+ * dobar je za male kolicine podataka, slicno bubble sortu - ima slozenost najgoreg slucaja,
+ * sto vise elemenata mora da preuredi, to mu je potrebno vise vremena.
+ *  
+ *  Selection sort uvodi dve privremene promenljive, u kojima cuva najmanju vrednost kao i vrednost 
+ *  koju menja sa tom najmanjom nakon svake iteracije. */
+
+public class Main {
+	public static void main(String[] args) {
+		int[] niz = {3, 12, 23, 16, 9, 5, 11, 23, 7, 28, 1, 4};
+		
+		for(int i : niz) {
+			System.out.print(i + " ");
+		}
+		
+		
+	}
+}

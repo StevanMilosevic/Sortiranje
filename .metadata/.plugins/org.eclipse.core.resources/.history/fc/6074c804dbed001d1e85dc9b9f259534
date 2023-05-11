@@ -1,0 +1,29 @@
+package insertion;
+
+/* Pocinjemo sa leve strane i to od indeksa br.1 i pomeramo tu vrednost u privremenu promenljivu, 
+ * zatim ispitujemo taj element niza i uporedjujemo ga sa elementima sa njegove leve strane. 
+ * Ako je element ili elementi sa leve strane veci od onog koji ispitujemo, menjamo im pozicije - INSERTUJEMO taj 
+ * element u odgovarajuci polozaj u nizu.  
+ *  */
+public class Main {
+
+	public static void main(String[] args) {
+		int[] niz = {3, 8, 11, 19, 22, 4, 13, 1, 6, 10, 7, 15, 10, 5};
+		
+		// stampampo niz
+		for(int i : niz)
+			System.out.print(i + " ");
+	}
+	public void sort(int[] niz) {
+		for(int i =1; i < niz.length; i++) {
+			int temp = niz[i];
+			int j = i - 1;
+			while(j >= 0 && niz[j] > temp) {
+				niz[j + 1] = niz[j];
+				j--;
+			}
+			niz[j + 1] = temp;
+		}
+	}
+
+}

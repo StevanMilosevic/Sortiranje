@@ -1,0 +1,99 @@
+package merge;
+
+/* Merge sort se obicno obavlja rekurzivno. Zovu ga jos i divide and conquer algorithm, zato sto
+ * deli problem na manje podprobleme, zatim resava te manje probleme pa ih kombinuje nazad u zeljeni
+ * rezultat. 
+ * U slucaju merge sortiranja elemenata niza to znaci da ce niz biti podeljen na dva dela, 
+ * zatim se svaki od ta dva dela da bude merge sortiran rekurzivno dalje (opet podeljen na dva, pa oni dalje na dva...)
+ * i tako dok se ne dodje do samih elemenata, koji se preuredjuju prema redosledu. Zatim ce oni biti sortirani nazad
+ * ka onom pocetnom nizu ali ce u svakom koraku nazad njihov redosled da bude uskladjen na nacin kako mi to zelimo. 
+ * Dakle kad se svaka polovina dovede u red, onda ce one da budu mergovane nazad u onaj veliki, pocetni niz  
+ * ali sada pod odgovarajucim redosledom elemenata.  
+ * 
+ * Merge sort je brzi od bubble, selection i insertion sort ali sa druge strane koristi vise memorije, 
+ * posto pravimo nove nizove sa njim. */
+
+public class Main {
+
+	public static void main(String[] args) {
+		int[] niz = { 5, 16, 8, 10, 3, 14, 18, 7, 1, 9, 15 };
+
+		// stampamo prvobitno stanje niza
+		for (int i : niz)
+			System.out.print(i + " ");
+
+		mergeSort(niz);
+		
+		System.out.println("\nNiz nakon merge sortiranja");
+		// stampamo sortiran niz
+		for(int in : niz)
+			System.out.print(in + " ");
+		
+	}
+
+	// algoritam
+	private static void mergeSort(int[] niz) {
+		int duzina = niz.length;
+		if(duzina <= 1) {	// ako se ovo dogodi, nema potrebe da dalje delimo nas niz
+			return;			
+		}
+		
+		
+		// delimo niz na dva dela
+		int sredina = duzina / 2;			// pronalazimo sredinu niza koga treba da preuredimo
+		int[] leviNiz = new int[sredina];	// niz moze da ima i neparan broj elemenata
+		int[] desniNiz = new int[duzina - sredina];	// zato ovako deklarisemo desniNiz
+		
+		int i = 0;	// pocetni indeks za levi niz
+		int j = 0;	// pocetni indeks za desni niz
+		
+		for(; i < duzina; i++) {
+			if(i < sredina) {
+				leviNiz[i] = niz[i];
+			}
+			else {
+				desniNiz[j] = niz[i];
+				j++;		// petlja ne inkrementuje ovu promenljivu, zato moramo mi
+			}
+		}
+		mergeSort(leviNiz);
+		mergeSort(desniNiz);
+		merge(leviNiz, desniNiz, niz);
+	}
+	
+	private static void merge(int[] leviNiz, int[] desniNiz, int[] niz) {
+		
+		int lSize = niz.length / 2;			// velicina levogNiza
+		int dSize = niz.length - lSize;		// velicina desnogNiza
+		int i = 0, l = 0, d = 0; 			// indeksi za nizove
+		
+		/* proveravamo uslove za merge (spajanje) nizova uz pomoc WHILE */
+		while(l < lSize && d < dSize) {
+			// sve dok ima elemenata u levomNizu i desnomNizu mi cemo da dodajemo elemente u originalni niz
+			if(leviNiz[l] < desniNiz[d]) {	// uz proveru koji element je manji
+				niz[i] = leviNiz[l];
+				i++;
+				l++;
+			}
+			else {
+				niz[i] = desniNiz[d];
+				i++;
+				d++;
+			}
+		}
+		/* ostaje sansa da ce ostati jedan element koji ne moze biti uporedjen sa nekim drugim, 
+		(posto je ostao samo jedan), zato uvodimo WHILE petlje, jednu za leviNiz, drugu za desniNiz */
+		while(l < lSize) {
+			niz[i] = leviNiz[l];
+			i++;
+			l++;
+		}
+		while(d < dSize) {
+			niz[i] = desniNiz[d];
+			i++;
+			d++;
+		}
+		
+	}
+
+}
